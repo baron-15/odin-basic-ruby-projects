@@ -86,54 +86,52 @@ class Master
         end
         return false
     end
-end
 
-def make()
-    @guessCount = 0
-    puts
-    puts "Please input your 4-digit answer of 1 to 6. "
-    @answerString = gets.chomp
-    userMake = @answerString.split('')
-    strCount = 0
-    @answerList = []
-    userMake.each do |c|
-        strCount +=1
-        @answerList.push(c.to_i)
-        if !(c.to_i.between?(1,6))
-            puts "Invalid make at digit #{strCount}."
+    def make()
+        @guessCount = 0
+        puts
+        puts "Please input your 4-digit answer of 1 to 6. "
+        @answerString = gets.chomp
+        userMake = @answerString.split('')
+        strCount = 0
+        @answerList = []
+        userMake.each do |c|
+            strCount +=1
+            @answerList.push(c.to_i)
+            if !(c.to_i.between?(1,6))
+                puts "Invalid make at digit #{strCount}."
+                make()
+            end
+        end
+        if strCount != 4
+            puts "Not a 4-digit make."
             make()
         end
+        compGuess()
     end
-    if strCount != 4
-        puts "Not a 4-digit make."
-        make()
-    end
-    compGuess()
-end
 
-def compGuess()
-    @guessString = ''
-    for guess1 in 1..6
-        for guess2 in 1..6
-            for guess3 in 1..6
-                for guess4 in 1..6
-                    @guessList[0] = guess1
-                    @guessList[1] = guess2
-                    @guessList[2] = guess3
-                    @guessList[3] = guess4
-                    @guessString = @guessList.join("")
-                    @guessCount += 1
-                    puts "Judging."
-                    if judge()
-                        compWin()
-                        return
+    def compGuess()
+        @guessString = ''
+        for guess1 in 1..6
+            for guess2 in 1..6
+                for guess3 in 1..6
+                    for guess4 in 1..6
+                        @guessList[0] = guess1
+                        @guessList[1] = guess2
+                        @guessList[2] = guess3
+                        @guessList[3] = guess4
+                        @guessString = @guessList.join("")
+                        @guessCount += 1
+                        puts "Judging."
+                        if judge()
+                            compWin()
+                            return
+                        end
                     end
                 end
             end
         end
     end
-end
-
 #    Advanced algorithm: for future fun
 #    guessCount = 0
 #    @guessList = [1, 2, 3, 4]
@@ -151,15 +149,16 @@ end
 #    end
 ##
 
-def guessWin
-    puts "Congrats! you guessed it right!"
-    pick()
-end
+    def guessWin
+        puts "Congrats! you guessed it right!"
+        pick()
+    end
 
-def compWin
-    puts "NOOOO! Computer guessed it right!"
-    puts " The answer is #{@guessString}. Computer got it right in #{@guessCount} attempts."
-    pick()
+    def compWin
+        puts "NOOOO! Computer guessed it right!"
+        puts " The answer is #{@guessString}. Computer got it right in #{@guessCount} attempts."
+        pick()
+    end
 end
 
 def welcome
