@@ -63,9 +63,6 @@ class Tic
         end
         return false
     end
-
-
-
 end
 
 def welcome
