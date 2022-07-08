@@ -13,7 +13,7 @@ class Tic
             @board[@row][@column] = i+1
             i+=1
         end
-        puts "#{@name1}: X. #{name2}: O."
+        puts "#{@name1}: X. #{@name2}: O."
     end
 
     def startGame()
